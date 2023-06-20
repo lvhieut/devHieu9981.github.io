@@ -1,0 +1,70 @@
+package com.example.appcontact.adapter;
+
+import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.appcontact.MainActivity;
+import com.example.appcontact.R;
+import com.example.appcontact.db.entity.Contact;
+
+import java.util.ArrayList;
+
+public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.MyviewHolder> {
+
+    //1- variable
+    private Context context;
+    private ArrayList<Contact> contactsList;
+    private MainActivity mainActivity;
+
+    //2- viewHolder
+    public class MyviewHolder extends RecyclerView.ViewHolder{
+        public TextView name;
+        public TextView email;
+
+        public MyviewHolder(@NonNull View itemView) {
+            super(itemView);
+            this.name = itemView.findViewById(R.id.name);
+            this.email = itemView.findViewById(R.id.email);
+        }
+    }
+
+    public ContactsAdapter(Context context, ArrayList<Contact> contacts, MainActivity mainActivity){
+        this.context = context;
+        this.contactsList = contacts;
+        this.mainActivity = mainActivity;
+    }
+
+    @NonNull
+    @Override
+    public MyviewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View itemView = LayoutInflater.from(parent.getContext()).
+                inflate(R.layout.contact_list_item, parent, false);
+
+        return new MyviewHolder(itemView);
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull MyviewHolder holder, int positions) {
+        final Contact contact = contactsList.get(positions);
+        holder.name.setText(contact.getName());
+        holder.email.setText(contact.getEmail());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mainActivity.addAndEditContacts(true, contact, holder.getAdapterPosition());
+            }
+        });
+    }
+
+    @Override
+    public int getItemCount() {
+        return contactsList.size();
+    }
+}
