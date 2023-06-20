@@ -10,21 +10,22 @@
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:theme="@style/AppTheme.AppBarOverlay">
 
         <androidx.appcompat.widget.Toolbar
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:popupTheme="@color/purple_200"
-            android:id="@+id/toolbar"/>
+            android:id="@+id/toolbar"
+            app:popupTheme="@style/AppTheme.PopupOverlay"/>
 
     </com.google.android.material.appbar.AppBarLayout>
 
     <include
         android:id="@+id/include"
         layout="@layout/content_main"
-        android:layout_width="409dp"
-        android:layout_height="677dp"
+        android:layout_width="413dp"
+        android:layout_height="678dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

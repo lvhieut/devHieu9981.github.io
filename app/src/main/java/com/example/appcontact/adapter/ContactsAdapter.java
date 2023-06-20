@@ -15,19 +15,19 @@ import com.example.appcontact.db.entity.Contact;
 
 import java.util.ArrayList;
 
-public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.MyviewHolder> {
+public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.MyViewHolder> {
 
-    //1- variable
+    // 1- Variable
     private Context context;
     private ArrayList<Contact> contactsList;
     private MainActivity mainActivity;
 
-    //2- viewHolder
-    public class MyviewHolder extends RecyclerView.ViewHolder{
+    // 2- ViewHolder
+    public class MyViewHolder extends RecyclerView.ViewHolder{
         public TextView name;
         public TextView email;
 
-        public MyviewHolder(@NonNull View itemView) {
+        public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             this.name = itemView.findViewById(R.id.name);
             this.email = itemView.findViewById(R.id.email);
@@ -40,28 +40,32 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.Myview
         this.mainActivity = mainActivity;
     }
 
+
     @NonNull
     @Override
-    public MyviewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).
-                inflate(R.layout.contact_list_item, parent, false);
+                inflate(R.layout.contact_list_item,parent,false);
 
-        return new MyviewHolder(itemView);
+        return new MyViewHolder(itemView);
     }
 
+
     @Override
-    public void onBindViewHolder(@NonNull MyviewHolder holder, int positions) {
+    public void onBindViewHolder(@NonNull MyViewHolder holder,int positions) {
         final Contact contact = contactsList.get(positions);
+
         holder.name.setText(contact.getName());
         holder.email.setText(contact.getEmail());
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mainActivity.addAndEditContacts(true, contact, holder.getAdapterPosition());
+                mainActivity.addAndEditContacts(true,contact,holder.getAdapterPosition());
             }
         });
     }
+
 
     @Override
     public int getItemCount() {

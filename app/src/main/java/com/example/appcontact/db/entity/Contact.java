@@ -1,16 +1,31 @@
 package com.example.appcontact.db.entity;
 
+
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
+
+@Entity(tableName = "contacts")
+
 public class Contact {
-    // 1- Constants for database
-    public static final String TABLE_NAME ="contacts";
-    public static final String COLUMN_ID ="contact_id";
-    public static final String COLUMN_NAME ="contact_name";
-    public static final String COLUMN_EMAIL ="contact_email";
+
     // 2- variables
+    @ColumnInfo(name = "contact_name")
     private String name;
+
+
+    @ColumnInfo(name = "contact_email")
     private String email;
+
+
+    @ColumnInfo(name = "contact_id" )
+    @PrimaryKey(autoGenerate = true)
     private int id;
+
+
     //3 - Constructors
+    @Ignore
     public Contact(){
 
     }
@@ -47,11 +62,5 @@ public class Contact {
         this.id = id;
     }
 
-    //Creating the table : SQL query
-    public static final String CREATE_TABLE =
-            "CREATE TABLE " + TABLE_NAME + "("
-            + COLUMN_ID + " INTERGER PRIMARY KEY AUTOINCREMENT, "
-            + COLUMN_NAME + " TEXT, "
-            + COLUMN_EMAIL + " TEXT"
-            + ")";
+
 }
